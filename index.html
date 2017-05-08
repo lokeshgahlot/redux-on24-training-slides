@@ -193,8 +193,30 @@
 					</pre>
 				</section>
 
-				<section data-menu-title='Subscribed view' data-markdown data-transition="zoom">
-					### Subscribed view
+				<section data-menu-title='Subscribed view' data-transition="zoom">
+					<h3>Subscribed view</h3>
+					<pre>
+						<code data-trim data-noescape>
+							import {<span class="fragment highlight-background" data-fragment-index="0">connect</span>} from 'react-redux';
+
+							<span class="fragment highlight-background" data-fragment-index="2">@connect((state) => {
+							  return {
+							    todos: state.todos,
+							  }
+							})</span>
+							export default class Todos extends React.Component {
+								componentDidMount() {
+									console.log(<span class="fragment highlight-background" data-fragment-index="2">this.props.todos</span>);
+								}
+							}
+						</code>
+						<code data-trim data-noescape>
+							function <span class="fragment highlight-background" data-fragment-index="3">mapStateToProps</span>(state) {
+							  return { todos: state.todos }
+							}
+							export default connect(<span class="fragment highlight-background" data-fragment-index="3">mapStateToProps</span>)(TodoApp)
+						</code>
+					</pre>
 				</section>
 
 				<section data-markdown data-transition="zoom">
