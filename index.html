@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Redux</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,90 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+			<style>
+				.reveal section img {
+					background: none;
+					border: 0;
+					box-shadow: none;
+				}
+
+				.reveal pre {
+					box-shadow: none;
+				}
+
+				.reveal .slides section .fragment.highlight-background {
+					opacity: 1;
+					visibility: inherit;
+				}
+
+				.reveal .slides section .fragment.highlight-background.current-fragment {
+					background-color: #0072D6;
+				}
+
+			</style>
+
+				<section data-menu-title='Home' data-transition="zoom">
+						<img src="assets/redux-logo.png" alt="redux logo" title="logo">
+				</section>
+				<section data-menu-title='Redux Flow chart' data-transition="zoom">
+					<img src="assets/redux-flow.gif" alt="redux flow chart" title="flow chart">
+				</section>
+
+				<section data-menu-title='Component or View' data-transition="zoom">
+					<h3>Component or view</h3>
+					<pre>
+						<code data-trim data-noescape>
+							<span class="fragment highlight-background" data-fragment-index="0">import {connect} from 'react-redux'; </span>
+							<span class="fragment highlight-background" data-fragment-index="3">import {fetchEventInfo} from 'main/actions/main.actions'; </span>
+
+							export class Main extends React.Component {
+
+							  componentWillMount() {
+							    let {location, <span class="fragment highlight-background" data-fragment-index="2"> dispatch} = this.props; </span>
+							    if (location && location.query) {
+							      <span class="fragment highlight-background" data-fragment-index="4">dispatch(fetchEventInfo(location.query)); </span>
+							    }
+							  }
+							  render() {...}
+							}
+							<span class="fragment highlight-background" data-fragment-index="1">export default connect()(Main);</span>
+
+						</code>
+					</pre>
+				</section>
+
+				<section data-menu-title='Actions' data-markdown data-transition="zoom">
+					### Actions or action creator
+					![picture alt](assets/actions.png "component")
+				</section>
+
+				<section data-menu-title='Middlewares' data-markdown data-transition="zoom">
+					### Actions with middlewares
+					![picture alt](assets/action-with-middleware.png "action-with-middleware")
+				</section>
+
+				<section data-menu-title='Reducers' data-markdown data-transition="zoom">
+					### Reducers
+					![picture alt](assets/reducers.png "reducers")
+				</section>
+
+				<section data-menu-title='Combine Reducers' data-markdown data-transition="zoom">
+					### Combine Reducers
+					![picture alt](assets/combine-reducers.png "combine reducers")
+				</section>
+
+				<section data-menu-title='Store' data-markdown data-transition="zoom">
+					### Store
+					![picture alt](assets/store.png "combine reducers")
+				</section>
+
+				<section data-menu-title='Subscribed view' data-markdown data-transition="zoom">
+					### Subscribed view
+				</section>
+
+				<section data-markdown data-transition="zoom">
+					# Thank You!!
+				</section>
 			</div>
 		</div>
 
@@ -37,10 +119,15 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				slideNumber: true,
+				history: true,
+				overview: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/zoom-js/zoom.js', async: true }, // Zoom in and out with Alt+click
 					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'node_modules/reveal.js-menu/menu.js' },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
