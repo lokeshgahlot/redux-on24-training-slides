@@ -171,9 +171,26 @@
 					</pre>
 				</section>
 
-				<section data-menu-title='Store' data-markdown data-transition="zoom">
-					### Store
-					![picture alt](assets/store.png "combine reducers")
+				<section data-menu-title='Store' data-transition="zoom">
+					<h3>Store</h3>
+					<pre>
+						<code data-trim data-noescape>
+							// configure.store.jsx
+							import * as redux from 'redux';
+							import thunk from 'redux-thunk';
+
+							import reducers from <span class="fragment highlight-background" data-fragment-index="0">'common/reducers'</span>;
+
+							export var configure = (initialState = {}) => {
+							  var store = <span class="fragment highlight-background" data-fragment-index="2">redux.createStore</span>(<span class="fragment highlight-background" data-fragment-index="1">reducers</span>, initialState, redux.compose(
+							    <span class="fragment highlight-background" data-fragment-index="3">redux.applyMiddleware(thunk)</span>,
+							    window.devToolsExtension ? window.devToolsExtension() : f => f
+							  ));
+
+							  return store;
+							};
+						</code>
+					</pre>
 				</section>
 
 				<section data-menu-title='Subscribed view' data-markdown data-transition="zoom">
