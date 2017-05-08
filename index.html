@@ -131,14 +131,44 @@
 					</pre>
 				</section>
 
-				<section data-menu-title='Reducers' data-markdown data-transition="zoom">
-					### Reducers
-					![picture alt](assets/reducers.png "reducers")
+				<section data-menu-title='Reducers' data-transition="zoom">
+					<h3>Reducers</h3>
+					<pre>
+						<code data-trim data-noescape>
+							// main.reducers.jsx
+							import {FETCH_EVENT_INFO_SUCCESS} from 'main/actions/main.actions';
+
+							export const setEventInfoReducer = (<span class="fragment highlight-background" data-fragment-index="0"> state = {}</span>, <span class="fragment highlight-background" data-fragment-index="1">action</span>) => {
+
+							  switch (action.type) {
+							    case <span class="fragment highlight-background" data-fragment-index="2">FETCH_EVENT_INFO_SUCCESS</span>:
+							      <span class="fragment highlight-background" data-fragment-index="3"> return fromJS(state).merge(action.payload).toJS(); </span>
+							    break;
+							  }
+							  return fromJS(state).toJS();
+						</code>
+					</pre>
 				</section>
 
-				<section data-menu-title='Combine Reducers' data-markdown data-transition="zoom">
-					### Combine Reducers
-					![picture alt](assets/combine-reducers.png "combine reducers")
+				<section data-menu-title='Combine Reducers' data-transition="zoom">
+					<h3>Combine Reducers</h3>
+					<pre>
+						<code data-trim data-noescape>
+							//common/reducers/index.jsx
+							<span class="fragment highlight-background" data-fragment-index="0">import {combineReducers} from 'redux';</span>
+							import {setEventInfoReducer} from 'main/reducers/main.reducers';
+							import {toggleWidgetManagerWindowReducer} from 'app-config-window/widget-manager/reducers/widgetManager.reducers';
+							import {toggleStylingManagerWindowReducer} from 'app-config-window/styling-manager/reducers/stylingManager.reducers';
+
+							<span class="fragment highlight-background" data-fragment-index="1">
+							export default combineReducers({
+							    eventInfo: setEventInfoReducer,
+							    toggleWidgetManagerWindow: toggleWidgetManagerWindowReducer,
+							    toggleStylingManagerWindow: toggleStylingManagerWindowReducer
+							});
+						</span>
+						</code>
+					</pre>
 				</section>
 
 				<section data-menu-title='Store' data-markdown data-transition="zoom">
