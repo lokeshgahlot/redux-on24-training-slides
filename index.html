@@ -77,14 +77,58 @@
 					</pre>
 				</section>
 
-				<section data-menu-title='Actions' data-markdown data-transition="zoom">
-					### Actions or action creator
-					![picture alt](assets/actions.png "component")
+				<section data-menu-title='Actions' data-transition="zoom">
+					<h3> Actions or action creator </h3>
+					<pre>
+						<code data-trim data-noescape>
+						// Header.jsx
+						showStylingManagerWindow() {
+							let {dispatch} = this.props;
+							<span class="fragment highlight-background" data-fragment-index="0">dispatch</span>(<span class="fragment highlight-background" data-fragment-index="1">showStylingManagerWindow()</span>);
+						}
+						</code>
+					</pre>
+
+					<pre>
+						<code data-trim data-noescape>
+							// header.actions.jsx
+							export const SHOW_STYLING_MANAGER_WINDOW = 'SHOW_STYLING_MANAGER_WINDOW';
+							export const <span class="fragment highlight-background" data-fragment-index="2">showStylingManagerWindow</span> = () => {
+							  return {
+							    <span class="fragment highlight-background" data-fragment-index="3">type: SHOW_STYLING_MANAGER_WINDOW</span>
+							  }
+							}
+						</code>
+					</pre>
 				</section>
 
-				<section data-menu-title='Middlewares' data-markdown data-transition="zoom">
-					### Actions with middlewares
-					![picture alt](assets/action-with-middleware.png "action-with-middleware")
+				<section data-menu-title='Middlewares' data-transition="zoom">
+					<h3> Actions with middlewares </h3>
+					<pre>
+						<code data-trim data-noescape>
+							// main.action.jsx
+							export const <span class="fragment highlight-background" data-fragment-index="0">fetchEventInfo</span> = (queryParams) => {
+							  return dispatch => {
+							    dispatch({type: <span class="fragment highlight-background" data-fragment-index="1">FETCH_EVENT_INFO_REQUEST </span>});
+							    queryParams = queryParams || {};
+							    const {
+							      eventId,
+							      key,
+							      profiletype: displayProfile
+							    } = queryParams;
+
+							    return <span class="fragment highlight-background" data-fragment-index="2">fetchEventInfoApi</span>({eventId, key, displayProfile})
+							      .then((res)=> {
+							          const payload = fromJS(res.data).toJS();
+							          dispatch({
+							              type: <span class="fragment highlight-background" data-fragment-index="3">FETCH_EVENT_INFO_SUCCESS,</span>
+							              payload: fromJS(res.data).merge({queryParams}).toJS()
+							          });
+							      });
+							  };
+							}
+						</code>
+					</pre>
 				</section>
 
 				<section data-menu-title='Reducers' data-markdown data-transition="zoom">
